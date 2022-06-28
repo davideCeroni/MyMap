@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "34111488238",
+    "project_id": "stage-rossi",
+    "storage_bucket": "stage-rossi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34111488238:android:85c5466a26229d6042b3ff",
+        "android_client_info": {
+          "package_name": "com.example.mymap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34111488238-dqu88gocbhsf7lnurt1ik499kco6r6us.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqB5HlM9Vj0_2k5H88dRjioCAAjkXi-fc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34111488238-dqu88gocbhsf7lnurt1ik499kco6r6us.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
