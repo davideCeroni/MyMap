@@ -11,9 +11,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.auth.AuthUI
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +27,7 @@ class ProfileFragment: Fragment() {
     private lateinit var txtUsername: TextView
     private lateinit var currentUser: UserInfo
     private lateinit var btnEdit: ImageButton
+    private lateinit var btnSignOut: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,13 +38,25 @@ class ProfileFragment: Fragment() {
         imgProfile = root.findViewById(R.id.imgProfile)
         txtUsername = root.findViewById(R.id.txtUsername)
         btnEdit = root.findViewById(R.id.btnEdit)
-
-        getUserInfo()
+        btnSignOut = root.findViewById(R.id.btnSignOut)
 
         btnEdit.setOnClickListener() {
             val intent = Intent (activity!!, PersonalizeActivity::class.java)
             startActivity(intent)
         }
+
+        btnSignOut.setOnClickListener() {
+            AuthUI.getInstance()
+                .signOut(activity!!)
+                .addOnCompleteListener {
+                    val intent = Intent (activity!!, FirebaseUIActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(intent)
+                    activity!!.finish()
+                }
+        }
+
+        getUserInfo()
 
         return root
     }

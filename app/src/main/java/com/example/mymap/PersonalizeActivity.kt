@@ -5,10 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.ResponseBody
@@ -16,12 +13,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class PersonalizeActivity: AppCompatActivity() {
 
     private lateinit var rbtnGroup: RadioGroup
     private lateinit var txtTypeUsername: TextView
     private lateinit var editTextUsername: EditText
-    private lateinit var btnSelect: Button
+    private lateinit var btnSave: Button
+    private var avatar = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +29,11 @@ class PersonalizeActivity: AppCompatActivity() {
         rbtnGroup = findViewById(R.id.rbtnGroup)
         txtTypeUsername = findViewById(R.id.txtTypeUsername)
         editTextUsername = findViewById(R.id.edittextUsername)
-        btnSelect = findViewById(R.id.btnSelect)
+        btnSave = findViewById(R.id.btnSave)
 
         editTextUsername.text = SpannableStringBuilder(MyApplication.instance.currentFirebaseUser!!.displayName.toString())
 
-        btnSelect.setOnClickListener() {
+        btnSave.setOnClickListener() {
             userExist(this)
         }
     }
@@ -55,7 +54,7 @@ class PersonalizeActivity: AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun updateUser(username: String, avatar: Int, thisContext: Context) {
+    private fun updateUser(username: String, avatar: Int) {
         val apiInterface = ApiInterface.create().updateUser(User("", username, avatar))
 
         apiInterface.enqueue( object : Callback<ResponseBody> {
@@ -76,10 +75,11 @@ class PersonalizeActivity: AppCompatActivity() {
 
             override fun onResponse(call: Call<ErrorMessage>, response: Response<ErrorMessage>) {
                 val errorMessage = response.body()!!
+                val radioButton: RadioButton = findViewById(rbtnGroup.checkedRadioButtonId)
                 if (errorMessage.message == "user not found") {
-                    createUser(editTextUsername.text.toString(), rbtnGroup.checkedRadioButtonId, thisContext)
+                    createUser(editTextUsername.text.toString(), radioButton.text.toString().toInt(), thisContext)
                 } else {
-                    updateUser(editTextUsername.text.toString(), rbtnGroup.checkedRadioButtonId, thisContext)
+                    updateUser(editTextUsername.text.toString(), radioButton.text.toString().toInt())
                 }
             }
 
@@ -89,4 +89,3 @@ class PersonalizeActivity: AppCompatActivity() {
         })
     }
 }
-

@@ -9,79 +9,103 @@
         android:id="@+id/txtTypeUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:text="Type your username!"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edittextUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTypeUsername" />
 
     <RadioGroup
         android:id="@+id/rbtnGroup"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_height="wrap_content"
+        android:layout_height="256dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="80dp">
 
         <RadioButton
             android:button="@null"
-            android:background="@drawable/avatar1"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:text="1"
+            android:textColor="@color/fui_transparent"
+            android:background="@drawable/radio_flat_selector1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="12dp"/>
 
         <RadioButton
             android:button="@null"
-            android:background="@drawable/avatar2"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:text="2"
+            android:textColor="@color/fui_transparent"
+            android:background="@drawable/radio_flat_selector2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="15dp"/>
 
         <RadioButton
             android:button="@null"
-            android:background="@drawable/avatar3"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:text="3"
+            android:textColor="@color/fui_transparent"
+            android:background="@drawable/radio_flat_selector3"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="15dp"/>
 
         <RadioButton
             android:button="@null"
-            android:background="@drawable/avatar4"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:text="4"
+            android:textColor="@color/fui_transparent"
+            android:background="@drawable/radio_flat_selector4"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="-390dp"
+            android:layout_marginTop="135dp" />
 
         <RadioButton
             android:button="@null"
-            android:background="@drawable/avatar5"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:text="5"
+            android:textColor="@color/fui_transparent"
+            android:background="@drawable/radio_flat_selector5"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="135dp"
+            android:layout_marginStart="15dp"/>
 
         <RadioButton
             android:button="@null"
-            android:background="@drawable/avatar6"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:text="6"
+            android:textColor="@color/fui_transparent"
+            android:background="@drawable/radio_flat_selector6"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="135dp"
+            android:layout_marginStart="15dp"/>
 
     </RadioGroup>
 
     <Button
-        android:id="@+id/btnSelect"
-        android:text="OK!"
+        android:id="@+id/btnSave"
+        android:text="SAVE"
         android:layout_width="150dp"
         android:layout_height="70dp"
         android:backgroundTint="@color/white"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rbtnGroup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

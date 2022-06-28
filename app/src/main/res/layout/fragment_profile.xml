@@ -47,7 +47,18 @@
         android:layout_marginEnd="80dp"
         android:backgroundTint="@color/fui_transparent"/>
 
-    <EditText
+    <ImageButton
+        android:id="@+id/btnSignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_sign_out"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@color/fui_transparent"/>
+
+    <TextView
         android:id="@+id/txtUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

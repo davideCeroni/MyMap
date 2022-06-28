@@ -13,6 +13,13 @@
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/ic_profile.xml" value="0.1325" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/ic_standings.xml" value="0.142" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/profile.xml" value="0.147" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/radio_flat_selector.xml" value="0.1475" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/radio_flat_selector1.xml" value="0.1475" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/radio_flat_selector2.xml" value="0.1475" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/radio_flat_selector3.xml" value="0.1475" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/radio_flat_selector4.xml" value="0.1475" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/radio_flat_selector5.xml" value="0.1475" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/radio_flat_selector6.xml" value="0.1475" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/rounded_corners.xml" value="0.1" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/shape.xml" value="0.147" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_end_fight.xml" value="0.25" />
@@ -20,7 +27,7 @@
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_firebase_ui.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_main.xml" value="0.1068840579710145" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_maps.xml" value="0.21693840579710144" />
-        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_personalization.xml" value="0.264" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_personalization.xml" value="0.2" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_result_launcher.xml" value="0.10572916666666667" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_start_fight.xml" value="0.25" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/auth_activity.xml" value="0.1" />

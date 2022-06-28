@@ -47,7 +47,7 @@
             android:layout_marginEnd="219dp"
             android:gravity="center"
             android:text="Second"
-            android:textColor="#5C5C5C"
+            android:textColor="#C0C0C0"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -63,7 +63,7 @@
             android:layout_marginEnd="88dp"
             android:gravity="center"
             android:text="First"
-            android:textColor="#A18030"
+            android:textColor="#FFD700"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -79,7 +79,7 @@
             android:layout_marginEnd="36dp"
             android:gravity="center"
             android:text="Third"
-            android:textColor="#5C3017"
+            android:textColor="#CD7F32"
             android:textSize="14sp"
             android:textStyle="bold" />
 
