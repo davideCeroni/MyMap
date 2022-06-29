@@ -19,8 +19,8 @@
 
     <TextView
         android:id="@+id/txtTitleRecNotifications"
-        android:gravity="center"
-        android:layout_width="320dp"
+        android:gravity="start"
+        android:layout_width="260dp"
         android:layout_height="30dp"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -28,6 +28,17 @@
         app:layout_constraintStart_toEndOf="@id/imgStateRecNotifications"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"/>
+
+    <ImageButton
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_delete"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/fui_transparent"/>
 
     <TextView
         android:id="@+id/txtSnippetRecNotifications"

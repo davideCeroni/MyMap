@@ -44,6 +44,9 @@ interface ApiInterface {
         @Body updateOwnerObj: UpdateOwnerObj
     ): Call<ResponseBody>
 
+    @DELETE("/notifications/delete-all")
+    fun clearNotifications(): Call<ResponseBody>
+
     companion object {
         private var BASE_URL = "http://192.168.1.104:3000/"
 

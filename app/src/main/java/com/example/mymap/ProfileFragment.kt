@@ -3,6 +3,7 @@ package com.example.mymap
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Process
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.system.exitProcess
 
 class ProfileFragment: Fragment() {
     private lateinit var recList: RecyclerView
@@ -49,11 +51,9 @@ class ProfileFragment: Fragment() {
             AuthUI.getInstance()
                 .signOut(activity!!)
                 .addOnCompleteListener {
-                    val intent = Intent (activity!!, FirebaseUIActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(intent)
-                    activity!!.finish()
+                    restartApp()
                 }
+
         }
 
         getUserInfo()
@@ -92,5 +92,15 @@ class ProfileFragment: Fragment() {
                 t.printStackTrace()
             }
         })
+    }
+
+    private fun restartApp() {
+        val intent = activity!!.baseContext.packageManager.getLaunchIntentForPackage(
+            activity!!.baseContext.packageName
+        )
+        intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        Process.killProcess(Process.myPid())
+        exitProcess(0)
     }
 }

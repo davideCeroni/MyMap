@@ -3,15 +3,18 @@ package com.example.mymap
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import retrofit2.Call
 import retrofit2.Callback
@@ -72,7 +75,7 @@ class MapFragment : Fragment() {
                                     .position(i.posizione.toLatLng())
                                     .title("${i.city},${i.state}")
                                     .snippet("Not owned. Tap me to fight!")
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ping_pink))
                             )
                         } else {
                             if (i.user!!.firebase_id == MyApplication.instance.currentFirebaseUser?.uid) {
@@ -82,7 +85,7 @@ class MapFragment : Fragment() {
                                         .title("${i.city},${i.state}")
                                         .snippet("  You own this point!\n" +
                                                 "Score: ${i.score}")
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ping_green))
                                 )
                             } else {
                                 googleMap.addMarker(
@@ -91,7 +94,7 @@ class MapFragment : Fragment() {
                                         .title("${i.city},${i.state}")
                                         .snippet("Own by ${i.user!!.username}. Tap me to fight!\n" +
                                                 "Score: ${i.score}")
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ping_red))
                                 )
                             }
                         }

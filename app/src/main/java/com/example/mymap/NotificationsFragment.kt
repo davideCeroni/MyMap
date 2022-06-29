@@ -5,16 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class NotificationsFragment: Fragment() {
     private lateinit var recList: RecyclerView
+    private lateinit var btnClearAll: ImageButton
     private lateinit var itemsList: ArrayList<Notification>
     private lateinit var customAdapter: CustomAdapterNotifications
     private lateinit var currentUser: UserInfo
@@ -25,6 +28,12 @@ class NotificationsFragment: Fragment() {
     ): View {
         val root = inflater.inflate(R.layout.fragment_notifications, null) as ViewGroup
         recList = root.findViewById(R.id.recListNotifications)
+        btnClearAll = root.findViewById(R.id.btnClearAll)
+
+        btnClearAll.setOnClickListener() {
+            clearNotifications()
+        }
+
         getUserInfo()
         return root
     }
@@ -50,6 +59,22 @@ class NotificationsFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<UserInfo>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun clearNotifications () {
+        val apiInterface = ApiInterface.create().clearNotifications()
+
+        apiInterface.enqueue( object : Callback<ResponseBody> {
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                getUserInfo()
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 t.printStackTrace()
             }
         })

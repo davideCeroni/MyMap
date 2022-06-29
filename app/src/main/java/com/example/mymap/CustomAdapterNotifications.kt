@@ -35,11 +35,11 @@ class CustomAdapterNotifications(private val dataSet: ArrayList<Notification>) :
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.txtTitle.text = dataSet[position].fightpoint.city + ", " + dataSet[position].fightpoint.state
         viewHolder.txtSnippet.text = dataSet[position].fightpoint.user!!.username + " beat your record and the new one is: " + dataSet[position].fightpoint.score.toString()
-        viewHolder.txtDateTime.text = dataSet[position].dateTime
+        viewHolder.txtDateTime.text = getDate(dataSet[position].dateTime)
 
         val state = dataSet[position].fightpoint.state.lowercase().replace(' ', '_')
         Picasso.get()
-            .load("http://192.168.1.104:3000/img?country=" + state)
+            .load("http://192.168.1.104:3000/img/country?country=" + state)
             .into(viewHolder.imgState, object: com.squareup.picasso.Callback {
                 override fun onSuccess() {}
                 override fun onError(e: java.lang.Exception?) {}
@@ -47,4 +47,25 @@ class CustomAdapterNotifications(private val dataSet: ArrayList<Notification>) :
     }
 
     override fun getItemCount() = dataSet.size
+
+    private fun getDate(str: String): String {
+        var finalString = ""
+        finalString += str[8]
+        finalString += str[9]
+        finalString += "/"
+        finalString += str[5]
+        finalString += str[6]
+        finalString += "/"
+        finalString += str[0]
+        finalString += str[1]
+        finalString += str[2]
+        finalString += str[3]
+        finalString += " at "
+        finalString += str[11]
+        finalString += str[12]
+        finalString += str[13]
+        finalString += str[14]
+        finalString += str[15]
+        return finalString
+    }
 }

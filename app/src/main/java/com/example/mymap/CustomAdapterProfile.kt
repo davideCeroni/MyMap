@@ -34,7 +34,7 @@ class CustomAdapterProfile(private val dataSet: ArrayList<FightPoint>) :
         val state = dataSet[position].state.lowercase().replace(' ', '_')
 
         Picasso.get()
-            .load("http://192.168.1.104:3000/img?country=" + state)
+            .load("http://192.168.1.104:3000/img/country?country=" + state)
             .into(viewHolder.imgState, object: com.squareup.picasso.Callback {
                 override fun onSuccess() {}
                 override fun onError(e: java.lang.Exception?) {}

@@ -138,8 +138,8 @@ class FightActivity: AppCompatActivity() {
 
             override fun onResponse(call: Call<QuestionAnswers>, response: Response<QuestionAnswers>) {
                 currentQuestionAnswers = response.body()!!
+                txtQuestion.text = currentQuestionAnswers.question
                 val rnd = (1..4).random()
-                Log.d("correctAnswer", currentQuestionAnswers.correct_answer)
                 when (rnd) {
                     1-> {
                         btnAnswer1.text = currentQuestionAnswers.correct_answer
