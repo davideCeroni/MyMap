@@ -10,15 +10,13 @@
         android:layout_width="296dp"
         android:layout_height="96dp"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:text="Welcome in MapFight!"
+        android:textSize="36sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="400dp"
-        android:text="Welcome in MapFight!"
-        android:textSize="36sp"
-        android:textStyle="bold"/>
+        android:layout_marginBottom="400dp"/>
 
     <RelativeLayout
         android:id="@+id/relEmail"
@@ -30,7 +28,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:elevation="5dp">
+        android:layout_marginTop="200dp"
+        android:elevation="20dp">
 
         <ImageView
             android:id="@+id/imgEmail"
@@ -64,7 +63,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="400dp"
         android:elevation="5dp">
 
         <ImageView
@@ -80,12 +79,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="?android:attr/borderlessButtonStyle"
-            android:text="         Sign with email"
+            android:text="         Sign with Google"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
     </RelativeLayout>
 
 

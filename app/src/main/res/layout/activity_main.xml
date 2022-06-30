@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="10dp"
-        android:background="@drawable/bg_rounded"
+        android:background="#CDF2FE"
         app:elevation="4dp"
         app:itemIconSize="30dp"
         app:itemIconTint="@color/bottom_nav_color"
