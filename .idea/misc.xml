@@ -34,7 +34,7 @@
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_end_fight.xml" value="0.25" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_fight.xml" value="0.1" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_firebase_ui.xml" value="0.21354166666666666" />
-        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_main.xml" value="0.1068840579710145" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_maps.xml" value="0.21693840579710144" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_personalization.xml" value="0.2" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/activity_result_launcher.xml" value="0.10572916666666667" />
@@ -52,6 +52,7 @@
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/fragment_standings.xml" value="0.264" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/fragmet_start_fight.xml" value="0.264" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/info_window.xml" value="0.1" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/item_carousel.xml" value="0.21041666666666667" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/item_carousel_lost.xml" value="0.25" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/item_rec_view.xml" value="0.1" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/item_rec_view_notifications.xml" value="0.25" />

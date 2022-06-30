@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
@@ -19,23 +20,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class MapFragment : Fragment() {
 
-    /*private val images = listOf(
-        R.drawable.avatar1,
-        R.drawable.avatar2,
-        R.drawable.avatar3,
-        R.drawable.avatar4
-    )*/
-
     private lateinit var rootView: View
+    private var currentUser: UserInfo? = null
+    private var fightPoints: List<FightPoint>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        getUserInfo()
         rootView = inflater.inflate(R.layout.fragment_map, container, false)
 
         val mapFragment =
@@ -65,13 +60,8 @@ class MapFragment : Fragment() {
                 startActivity(intent)
             }
         }
-
-        //val viewPager = initialiseViewPager()
-
         return rootView
     }
-
-    private var fightPoints: List<FightPoint>? = null
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun placeMarkers(googleMap: GoogleMap) {
@@ -80,46 +70,69 @@ class MapFragment : Fragment() {
         apiInterface?.enqueue( object : Callback<List<FightPoint>> {
 
             override fun onResponse(call: Call<List<FightPoint>>, response: Response<List<FightPoint>>) {
-                if(response.body() != null){
-                    fightPoints = response.body()
-                    for (i in fightPoints!!) {
-                        if(i.user == null) {
+                if(response.body() == null) return
+                fightPoints = response.body()
+                for (i in fightPoints!!) {
+                    if(i.user == null) {
+                        googleMap.addMarker(
+                            MarkerOptions()
+                                .position(i.posizione.toLatLng())
+                                .title("${i.city},${i.state}")
+                                .snippet("Not owned. Tap me to fight!")
+                                .icon(bitmapDescriptorFromVector(activity!!, R.drawable.ic_pin_blue))
+                        )
+                    } else {
+                        if (i.user!!.firebase_id == MyApplication.instance.currentFirebaseUser?.uid) {
                             googleMap.addMarker(
                                 MarkerOptions()
                                     .position(i.posizione.toLatLng())
                                     .title("${i.city},${i.state}")
-                                    .snippet("Not owned. Tap me to fight!")
-                                    .icon(bitmapDescriptorFromVector(activity!!, R.drawable.ic_ping_blue))
+                                    .snippet("  You own this point!\n" +
+                                            "Score: ${i.score}")
+                                    .icon(bitmapDescriptorFromVector(activity!!, R.drawable.ic_pin_green))
                             )
                         } else {
-                            if (i.user!!.firebase_id == MyApplication.instance.currentFirebaseUser?.uid) {
-                                googleMap.addMarker(
-                                    MarkerOptions()
-                                        .position(i.posizione.toLatLng())
-                                        .title("${i.city},${i.state}")
-                                        .snippet("  You own this point!\n" +
-                                                "Score: ${i.score}")
-                                        .icon(bitmapDescriptorFromVector(activity!!, R.drawable.ic_ping_green))
-                                )
-                            } else {
-                                googleMap.addMarker(
-                                    MarkerOptions()
-                                        .position(i.posizione.toLatLng())
-                                        .title("${i.city},${i.state}")
-                                        .snippet("Own by ${i.user!!.username}. Tap me to fight!\n" +
-                                                "Score: ${i.score}")
-                                        .icon(bitmapDescriptorFromVector(activity!!, R.drawable.ic_ping_red))
-                                )
-                            }
+                            googleMap.addMarker(
+                                MarkerOptions()
+                                    .position(i.posizione.toLatLng())
+                                    .title("${i.city},${i.state}")
+                                    .snippet("Own by ${i.user!!.username}. Tap me to fight!\n" +
+                                            "Score: ${i.score}")
+                                    .icon(bitmapDescriptorFromVector(activity!!, R.drawable.ic_pin_red))
+                            )
                         }
                     }
                 }
+                checkData()
             }
 
             override fun onFailure(call: Call<List<FightPoint>>, t: Throwable) {
                 t.printStackTrace()
             }
         })
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun getUserInfo () {
+        val apiInterface = ApiInterface.create().getUserInfo()
+
+        apiInterface?.enqueue( object : Callback<UserInfo> {
+
+            override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
+                currentUser = response.body()!!
+                checkData()
+            }
+
+            override fun onFailure(call: Call<UserInfo>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    private fun checkData(){
+        if (fightPoints != null && currentUser != null){
+            initialiseViewPager(CarouselInfo(currentUser!!.notifications, fightPoints!!))
+        }
     }
 
     private fun String.toLatLng(): LatLng {
@@ -136,10 +149,10 @@ class MapFragment : Fragment() {
         }
     }
 
-    /*private fun initialiseViewPager() = rootView.findViewById<ViewPager2>(R.id.carouselViewPager).apply {
+    private fun initialiseViewPager(carouselInfo: CarouselInfo) = rootView.findViewById<ViewPager2>(R.id.carouselViewPager).apply {
         adapter = CarouselAdapter(context).apply {
-            items = images
+            items = carouselInfo
             notifyDataSetChanged()
         }
-    }*/
+    }
 }

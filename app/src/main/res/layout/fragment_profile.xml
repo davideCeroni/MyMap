@@ -29,7 +29,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/rounded_corners"
-        android:layout_marginTop="10dp"
         android:elevation="5dp">
 
         <ImageView
@@ -67,14 +66,14 @@
         android:id="@+id/txtUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="150dp"
         android:text="Username"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="50dp"/>
 
     <TextView
         android:id="@+id/txtStates"
