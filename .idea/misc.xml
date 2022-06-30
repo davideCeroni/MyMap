@@ -7,6 +7,7 @@
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/bg_rounded.xml" value="0.114" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/button_oval.xml" value="0.1475" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/button_oval_blue.xml" value="0.1475" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/button_oval_green.xml" value="0.1475" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/button_oval_red.xml" value="0.1475" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/button_oval_white.xml" value="0.1475" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1325" />
@@ -51,6 +52,7 @@
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/fragment_standings.xml" value="0.264" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/fragmet_start_fight.xml" value="0.264" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/info_window.xml" value="0.1" />
+        <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/item_carousel_lost.xml" value="0.25" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/item_rec_view.xml" value="0.1" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/item_rec_view_notifications.xml" value="0.25" />
         <entry key="..\:/Users/david/Desktop/MyMap/app/src/main/res/layout/item_rec_view_profile.xml" value="0.25" />
