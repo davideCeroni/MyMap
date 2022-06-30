@@ -47,6 +47,11 @@ interface ApiInterface {
     @DELETE("/notifications/delete-all")
     fun clearNotifications(): Call<ResponseBody>
 
+    @DELETE("/notifications/delete")
+    fun clearNotification(
+        @Query("uuid") uuid: String
+    ): Call<ResponseBody>
+
     companion object {
         private var BASE_URL = "http://192.168.1.104:3000/"
 

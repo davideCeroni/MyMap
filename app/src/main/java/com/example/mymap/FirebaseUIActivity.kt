@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.firebase.ui.auth.AuthMethodPickerLayout
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class FirebaseUIActivity: AppCompatActivity() {
     private val signInLauncher = registerForActivityResult(
@@ -24,11 +26,17 @@ class FirebaseUIActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result_launcher)
+        setContentView(R.layout.activity_auth_method_picker)
         createSignInIntent()
     }
 
     private fun createSignInIntent() {
+
+        val customLayout = AuthMethodPickerLayout.Builder(R.layout.activity_auth_method_picker)
+            .setGoogleButtonId(R.id.btnGoogle)
+            .setEmailButtonId(R.id.btnEmail)
+            .build()
+
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(),
             AuthUI.IdpConfig.GoogleBuilder().build())
@@ -36,6 +44,8 @@ class FirebaseUIActivity: AppCompatActivity() {
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
+            .setAuthMethodPickerLayout(customLayout)
+            .setTheme(R.style.Theme_MyMap)
             .build()
         signInLauncher.launch(signInIntent)
     }
