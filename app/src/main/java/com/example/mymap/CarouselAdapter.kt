@@ -1,11 +1,14 @@
 package com.example.mymap
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import okhttp3.internal.notify
@@ -19,6 +22,7 @@ class CarouselAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
         val txtLost: TextView = view.findViewById(R.id.txtLost)
         val txtTitle: TextView = view.findViewById(R.id.txtTitleCarousel)
         val txtSnippet: TextView = view.findViewById(R.id.txtSnippetCarousel)
+        val btnFight: Button = view.findViewById(R.id.btnFightAgain)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -36,44 +40,44 @@ class CarouselAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         viewHolder as ItemCarousel
+        //prendo il fightpoint dell'item corrente
         val fightpointPosition: Int = position - items.notifications.size
-
+        lateinit var currentFightPoint: FightPoint
         if (fightpointPosition < 0){
             //notifica
-            val notifica: Notification = items.notifications[position]
-            viewHolder.txtTitle.text = "${notifica.fightpoint.state}, ${notifica.fightpoint.city}"
-            viewHolder.txtSnippet.text = notifica.fightpoint.user?.username
+            currentFightPoint = items.notifications[position].fightpoint
             viewHolder.txtLost.text = "You lost this state!"
-
-            Picasso.get()
-                .load("http://192.168.1.104:3000/img/country?country=${notifica.fightpoint.state}")
-                .into(viewHolder.imgState)
-
-            Picasso.get()
-                .load("http://192.168.1.104:3000/img/avatar?id=${notifica.fightpoint.user!!.avatar}")
-                .into(viewHolder.avatar)
-
-            return
         }
-        //  fightpoint
-        val fightpoint:FightPoint = items.fightpoints[fightpointPosition]
+        else{
+            currentFightPoint = items.fightpoints[fightpointPosition]
+        }
 
-        viewHolder.txtTitle.text = "${fightpoint.state}, ${fightpoint.city}"
+        viewHolder.btnFight.setOnClickListener{
+            val intent = Intent(context, StartFightActivity::class.java)
+            intent.putExtra("fightpoint_uuid", currentFightPoint.uuid)
+            intent.putExtra("ownerUsername", currentFightPoint.user?.username)
+            intent.putExtra("n_question", currentFightPoint.n_questions)
+            intent.putExtra("ownerScore", currentFightPoint.score)
+            startActivity(context, intent, intent.extras)
+        }
+
+
+        viewHolder.txtTitle.text = "${currentFightPoint.state}, ${currentFightPoint.city}"
 
         Picasso.get()
-            .load("http://192.168.1.104:3000/img/country?country=${fightpoint.state}")
+            .load("http://192.168.1.104:3000/img/country?country=${currentFightPoint.state}")
             .into(viewHolder.imgState)
 
-        if (fightpoint.user == null){
+        if (currentFightPoint.user == null){
             //  fightpoint senza owner
             viewHolder.txtSnippet.text = "Not Owned"
             return
         }
         //  fightpoint con owner
-        viewHolder.txtSnippet.text = fightpoint.user?.username
+        viewHolder.txtSnippet.text = currentFightPoint.user?.username
 
         Picasso.get()
-            .load("http://192.168.1.104:3000/img/avatar?id=${fightpoint.user!!.avatar}")
+            .load("http://192.168.1.104:3000/img/avatar?id=${currentFightPoint.user!!.avatar}")
             .into(viewHolder.avatar)
     }
 }

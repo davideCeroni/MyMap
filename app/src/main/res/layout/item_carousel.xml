@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rounded_corners"
+    android:backgroundTint="#F2FFFFFF"
     android:layout_gravity="center"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/iconCarousel"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -25,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/iconCarousel"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="15dp"/>
 
     <TextView
         android:id="@+id/txtLost"
@@ -36,25 +37,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginStart="10dp"/>
 
     <TextView
         android:id="@+id/txtSnippetCarousel"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="10dp"/>
+        app:layout_constraintStart_toEndOf="@id/avatarCarousel"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="15dp"/>
 
     <ImageView
         android:id="@+id/avatarCarousel"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
+        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -65,8 +66,8 @@
         android:orientation="vertical"
         android:background="@drawable/button_oval_green"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
         android:elevation="5dp">
 
