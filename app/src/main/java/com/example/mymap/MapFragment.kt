@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import retrofit2.Call
@@ -22,12 +23,15 @@ import retrofit2.Callback
 import retrofit2.Response
 import kotlin.math.roundToInt
 
+
 class MapFragment : Fragment() {
 
     private lateinit var rootView: View
     private var currentUser: UserInfo? = null
     private var fightPoints: List<FightPoint>? = null
     private lateinit var map: GoogleMap
+    private lateinit var carouselView: ViewPager2
+    private lateinit var carouselInfo: CarouselInfo
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +50,17 @@ class MapFragment : Fragment() {
             mMap.uiSettings.isMapToolbarEnabled = false
             mMap.setInfoWindowAdapter(CustomInfoWindowForGoogleMap(activity!!))
             placeMarkers(mMap)
+
+            mMap.setOnMarkerClickListener {
+                var position: Int? = null
+                carouselInfo.fightpoints.forEachIndexed { index, fightPoint ->
+                    if(it.position == fightPoint.posizione.toLatLng()) {
+                        position = index
+                    }
+                }
+                carouselView.setCurrentItem(position!!, true)
+                false
+            }
 
             mMap.setOnInfoWindowClickListener {
                 var currentFightPoint: FightPoint? = null
@@ -116,6 +131,7 @@ class MapFragment : Fragment() {
         })
     }
 
+
     @RequiresApi(Build.VERSION_CODES.N)
     private fun getUserInfo () {
         val apiInterface = ApiInterface.create().getUserInfo()
@@ -139,19 +155,19 @@ class MapFragment : Fragment() {
 
     private fun checkData(){
         if (fightPoints != null && currentUser != null){
-            val carousel = CarouselInfo(currentUser!!.notifications, fightPoints!!)
+            carouselInfo = CarouselInfo(currentUser!!.notifications, fightPoints!!)
 
-            val viewPager = initialiseViewPager(carousel)
+            carouselView = initialiseViewPager(carouselInfo)
 
-            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            carouselView.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageScrolled(position:Int, positionOffset:Float, positionOffsetPixels:Int) {
                     val pos = (position + positionOffset).roundToInt()
-                    val fightpointPosition: Int = pos - carousel.notifications.size
+                    val fightpointPosition: Int = pos - carouselInfo.notifications.size
 
                     if (fightpointPosition < 0) {
-                        moveCameraOnMarkSelected(carousel.notifications[pos].fightpoint.posizione)
+                        moveCameraOnMarkSelected(carouselInfo.notifications[pos].fightpoint.posizione)
                     } else {
-                        moveCameraOnMarkSelected(carousel.fightpoints[fightpointPosition].posizione)
+                        moveCameraOnMarkSelected(carouselInfo.fightpoints[fightpointPosition].posizione)
                     }
                 }
             })
@@ -179,3 +195,4 @@ class MapFragment : Fragment() {
         }
     }
 }
+
