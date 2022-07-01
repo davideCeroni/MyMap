@@ -2,9 +2,12 @@ package com.example.mymap
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.text.SpannableStringBuilder
+import android.text.TextWatcher
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -13,13 +16,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class PersonalizeActivity: AppCompatActivity() {
 
     private lateinit var rbtnGroup: RadioGroup
     private lateinit var txtTypeUsername: TextView
     private lateinit var editTextUsername: EditText
     private lateinit var btnSave: Button
+    private var nickSendable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +38,22 @@ class PersonalizeActivity: AppCompatActivity() {
 
         editTextUsername.text = SpannableStringBuilder(MyApplication.instance.currentFirebaseUser!!.displayName.toString())
 
-        btnSave.setOnClickListener() {
-            userExist(this)
+        editTextUsername.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) { }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                nickSendable = if(s.length < 3 || s.length > 13){
+                    editTextUsername.setTextColor(Color.parseColor("#cf0a2b"))
+                    false
+                } else {
+                    editTextUsername.setTextColor(Color.parseColor("#5de310"))
+                    true
+                }
+            }
+        })
+
+        btnSave.setOnClickListener {
+            if (nickSendable) userExist(this)
         }
     }
 

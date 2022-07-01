@@ -10,61 +10,63 @@
         android:layout_height="wrap_content"
         android:text="Question?"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtScore"
         app:layout_constraintBottom_toTopOf="@id/btnAnswer1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="100dp"
-        android:layout_marginTop="175dp"/>
+        android:layout_marginTop="75dp"/>
 
     <Button
         android:id="@+id/btnAnswer1"
         android:text="Answer1"
-        android:layout_width="150dp"
+        android:layout_width="350dp"
         android:layout_height="70dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="#FFFFFF"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/txtQuestion"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="150dp"
-        android:layout_marginStart="40dp"
-        android:clickable="true"/>
+        android:elevation="5dp"/>
 
     <Button
         android:id="@+id/btnAnswer2"
         android:text="Answer2"
-        android:layout_width="150dp"
+        android:layout_width="350dp"
         android:layout_height="70dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="#FFFFFF"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/txtQuestion"
+        app:layout_constraintTop_toBottomOf="@+id/btnAnswer1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="40dp"/>
+        android:layout_marginTop="10dp"
+        android:elevation="5dp"/>
 
     <Button
         android:id="@+id/btnAnswer3"
         android:text="Answer3"
-        android:layout_width="150dp"
+        android:layout_width="350dp"
         android:layout_height="70dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="#FFFFFF"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/btnAnswer1"
+        app:layout_constraintTop_toBottomOf="@+id/btnAnswer2"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="40dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:elevation="5dp"/>
 
     <Button
         android:id="@+id/btnAnswer4"
-        android:layout_width="150dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
-        android:backgroundTint="@color/white"
         android:text="Answer4"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#FFFFFF"
         android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@+id/btnAnswer3"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAnswer2"/>
+        android:layout_marginTop="10dp"
+        android:elevation="5dp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -84,9 +86,9 @@
         android:layout_height="wrap_content"
         android:text="Your score: 0"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/btnAnswer4"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="100dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

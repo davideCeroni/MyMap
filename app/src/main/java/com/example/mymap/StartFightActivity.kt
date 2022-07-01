@@ -32,7 +32,7 @@ class StartFightActivity: AppCompatActivity() {
             val intent = Intent(this, FightActivity::class.java)
             intent.putExtra("fightpoint_uuid", fightpoint_uuid)
             intent.putExtra("ownerUsername", ownerUsername)
-            intent.putExtra("n_question", n_question)
+            intent.putExtra("n_questions", n_question)
             intent.putExtra("ownerScore", ownerScore)
             startActivity(intent)
             finish()

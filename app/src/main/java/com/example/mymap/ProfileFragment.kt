@@ -42,13 +42,13 @@ class ProfileFragment: Fragment() {
         btnEdit = root.findViewById(R.id.btnEdit)
         btnSignOut = root.findViewById(R.id.btnSignOut)
 
-        btnEdit.setOnClickListener() {
+        btnEdit.setOnClickListener {
             val intent = Intent (activity!!, PersonalizeActivity::class.java)
             intent.putExtra("avatar", currentUser.avatar)
             startActivity(intent)
         }
 
-        btnSignOut.setOnClickListener() {
+        btnSignOut.setOnClickListener {
             AuthUI.getInstance()
                 .signOut(activity!!)
                 .addOnCompleteListener {

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="230dp"
     android:layout_margin="5dp"
     android:elevation="10dp"
     android:background="@drawable/rounded_corners"
@@ -47,13 +47,35 @@
         android:layout_height="30dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTitleRecNotifications"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+
+    <RelativeLayout
+        android:id="@+id/relReFight"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:orientation="vertical"
+        android:background="@drawable/button_oval_green"
+        app:layout_constraintTop_toBottomOf="@id/txtSnippetRecNotifications"
+        app:layout_constraintBottom_toTopOf="@id/txtDateTimeRecNotifications"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="15dp"/>
+        android:elevation="5dp">
+
+        <Button
+            android:id="@+id/btnReFight"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Fight"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/txtDateTimeRecNotifications"
@@ -62,12 +84,11 @@
         android:layout_height="20dp"
         android:textColor="@color/black"
         android:textSize="12sp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="110dp"/>
+        android:layout_marginBottom="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

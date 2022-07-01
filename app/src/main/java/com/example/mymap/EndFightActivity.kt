@@ -51,6 +51,10 @@ class EndFightActivity: AppCompatActivity() {
             }
         }
 
+        if (score == n_question) {
+            txtWin.text = txtWin.text.toString() +"\nYou have answered all questions correctly!"
+        }
+
         btnOk.setOnClickListener {
             updateOwner()
             val intent = Intent(this, MainActivity::class.java)
@@ -65,9 +69,7 @@ class EndFightActivity: AppCompatActivity() {
 
         apiInterface.enqueue( object : Callback<ResponseBody> {
 
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                val resp = response.body()
-            }
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {}
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 t.printStackTrace()

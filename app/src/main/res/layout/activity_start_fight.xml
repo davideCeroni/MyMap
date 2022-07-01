@@ -14,21 +14,35 @@
         android:layout_marginBottom="400dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You ar going to fight vs...!"
+        android:text="You are going to fight vs...!"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btnStart"
+    <TextView
+        android:id="@+id/txtSnippetFight"
         app:layout_constraintTop_toBottomOf="@id/txtTitleFight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer as many questions correctly as you can.\n
+        You have 30 seconds for each question and you can only miss 2 times.\n
+        Good Luck!"
+        android:gravity="center"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnStart"
         android:layout_width="150dp"
         android:layout_height="70dp"
+        android:background="@drawable/rounded_corners"
         android:backgroundTint="@color/white"
+        android:elevation="5dp"
         android:text="START!"
         android:textColor="#000000"
-        tools:layout_editor_absoluteX="135dp"
-        tools:layout_editor_absoluteY="233dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="200dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

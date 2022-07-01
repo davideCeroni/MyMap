@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import okhttp3.internal.notify
 
 class CarouselAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var items: CarouselInfo
@@ -56,7 +55,7 @@ class CarouselAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
             val intent = Intent(context, StartFightActivity::class.java)
             intent.putExtra("fightpoint_uuid", currentFightPoint.uuid)
             intent.putExtra("ownerUsername", currentFightPoint.user?.username)
-            intent.putExtra("n_question", currentFightPoint.n_questions)
+            intent.putExtra("n_questions", currentFightPoint.n_questions)
             intent.putExtra("ownerScore", currentFightPoint.score)
             startActivity(context, intent, intent.extras)
         }

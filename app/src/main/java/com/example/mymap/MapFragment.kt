@@ -33,7 +33,7 @@ class MapFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         getUserInfo()
         rootView = inflater.inflate(R.layout.fragment_map, container, false)
 
@@ -70,8 +70,8 @@ class MapFragment : Fragment() {
                 if(response.body() == null) return
                 fightPoints = response.body()
                 for (i in fightPoints!!) {
-                    var icon: Int? = null
-                    icon = when (i.user) {
+
+                    val icon: Int = when (i.user) {
                         null -> R.drawable.ic_pin_blue
                         else -> {
                             if (i.user!!.firebase_id == MyApplication.instance.currentFirebaseUser?.uid) R.drawable.ic_pin_green

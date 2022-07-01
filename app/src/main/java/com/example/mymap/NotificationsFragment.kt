@@ -27,10 +27,11 @@ class NotificationsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val root = inflater.inflate(R.layout.fragment_notifications, null) as ViewGroup
+
         recList = root.findViewById(R.id.recListNotifications)
         btnClearAll = root.findViewById(R.id.btnClearAll)
 
-        btnClearAll.setOnClickListener() {
+        btnClearAll.setOnClickListener {
             clearNotifications()
         }
 

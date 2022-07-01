@@ -4,10 +4,12 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import okhttp3.ResponseBody
@@ -20,11 +22,13 @@ class CustomAdapterNotifications(private val dataSet: ArrayList<Notification>) :
     RecyclerView.Adapter<CustomAdapterNotifications.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val thisView = view
         val imgState: ImageView = view.findViewById(R.id.imgStateRecNotifications)
         val txtTitle: TextView = view.findViewById(R.id.txtTitleRecNotifications)
         val txtSnippet: TextView = view.findViewById(R.id.txtSnippetRecNotifications)
         val txtDateTime: TextView = view.findViewById(R.id.txtDateTimeRecNotifications)
         val btnClear: ImageButton = view.findViewById(R.id.btnClear)
+        val btnReFight: Button = view.findViewById(R.id.btnReFight)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -46,9 +50,13 @@ class CustomAdapterNotifications(private val dataSet: ArrayList<Notification>) :
                 override fun onSuccess() {}
                 override fun onError(e: java.lang.Exception?) {}
             })
+
         viewHolder.btnClear.setOnClickListener {
             deleteNotification(dataSet[position].uuid, position)
+        }
 
+        viewHolder.btnReFight.setOnClickListener{
+            viewHolder.thisView.findNavController().navigate(R.id.mapFragment)
         }
     }
     @RequiresApi(Build.VERSION_CODES.N)

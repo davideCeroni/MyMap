@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -14,6 +13,7 @@ import androidx.core.animation.doOnEnd
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.random.Random
 
 class FightActivity: AppCompatActivity() {
     private lateinit var btnAnswer1: Button
@@ -33,6 +33,7 @@ class FightActivity: AppCompatActivity() {
     private var fightpoint_uuid: String = ""
     private var n_question: Int = 0
     private lateinit var currentQuestionAnswers: QuestionAnswers
+    private var listaQ: List<Int>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,11 @@ class FightActivity: AppCompatActivity() {
         ownerUsername = intent.getStringExtra("ownerUsername").toString()
         n_question = intent.getIntExtra("n_questions", 0)
         ownerScore = intent.getIntExtra("ownerScore", 0)
+
+        val from = 0
+        val to = n_question
+        val random = Random
+        listaQ  = IntArray(10) { random.nextInt(to - from) +  from }.asList()
 
         start()
     }
@@ -84,10 +90,14 @@ class FightActivity: AppCompatActivity() {
     }
 
     private fun answer(btn: Button) {
+        if (score == n_question){
+            obj.cancel()
+            endGame()
+        }
         if (btn.text == currentQuestionAnswers.correct_answer) {
 
             btn.setBackgroundColor(Color.GREEN)
-            object : CountDownTimer(300, 50) {
+            object : CountDownTimer(300, 100) {
                 override fun onTick(arg0: Long) { }
 
                 override fun onFinish() {
@@ -103,7 +113,7 @@ class FightActivity: AppCompatActivity() {
             miss += 1
             btn.setBackgroundColor(Color.RED)
 
-            object : CountDownTimer(300, 50) {
+            object : CountDownTimer(300, 100) {
                 override fun onTick(arg0: Long) { }
 
                 override fun onFinish() {
@@ -133,7 +143,14 @@ class FightActivity: AppCompatActivity() {
     }
 
     private fun newQuestion() {
-        val apiInterface = ApiInterface.create().getQuestionAnswers(fightpoint_uuid, (0..n_question).random())
+        if (score >= n_question){
+            obj.cancel()
+            endGame()
+        }
+
+        val n = listaQ!![score]
+
+        val apiInterface = ApiInterface.create().getQuestionAnswers(fightpoint_uuid, n)
 
         apiInterface.enqueue( object : Callback<QuestionAnswers> {
 
