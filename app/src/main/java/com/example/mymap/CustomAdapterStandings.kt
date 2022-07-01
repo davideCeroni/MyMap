@@ -13,10 +13,14 @@ class CustomAdapterStandings(private val dataSet: ArrayList<StandingsRecord>) :
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgAvatar: ImageView
-        val txtTitle: TextView
+        val txtUser: TextView
+        val txtScore: TextView
+        val txtNumber: TextView
 
         init {
-            txtTitle = view.findViewById(R.id.txtTitleRecProfile)
+            txtUser = view.findViewById(R.id.txtTitleRecProfile)
+            txtScore = view.findViewById(R.id.txtScoreRecProfile)
+            txtNumber = view.findViewById(R.id.txtNumberRecProfile)
             imgAvatar = view.findViewById(R.id.imgStateRecProfile)
         }
     }
@@ -29,10 +33,12 @@ class CustomAdapterStandings(private val dataSet: ArrayList<StandingsRecord>) :
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.txtTitle.text = dataSet[position].username + ", " + dataSet[position].score.toString()
+        viewHolder.txtNumber.text = "#${position + 4}"
+        viewHolder.txtUser.text = dataSet[position].username
+        viewHolder.txtScore.text = dataSet[position].score.toString()
 
         Picasso.get()
-            .load("http://192.168.1.104:3000/img/country?country=" + dataSet[position].avatar)
+            .load("http://192.168.1.104:3000/img/avatar?id=" + dataSet[position].avatar)
             .into(viewHolder.imgAvatar, object: com.squareup.picasso.Callback {
                 override fun onSuccess() {}
                 override fun onError(e: java.lang.Exception?) {}

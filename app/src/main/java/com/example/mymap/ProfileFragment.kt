@@ -44,6 +44,7 @@ class ProfileFragment: Fragment() {
 
         btnEdit.setOnClickListener() {
             val intent = Intent (activity!!, PersonalizeActivity::class.java)
+            intent.putExtra("avatar", currentUser.avatar)
             startActivity(intent)
         }
 
@@ -53,7 +54,6 @@ class ProfileFragment: Fragment() {
                 .addOnCompleteListener {
                     restartApp()
                 }
-
         }
 
         getUserInfo()

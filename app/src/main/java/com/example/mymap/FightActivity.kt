@@ -129,6 +129,7 @@ class FightActivity: AppCompatActivity() {
         intent.putExtra("ownerScore", ownerScore)
         intent.putExtra("score", score)
         startActivity(intent)
+        finish()
     }
 
     private fun newQuestion() {
@@ -172,5 +173,9 @@ class FightActivity: AppCompatActivity() {
                 t.printStackTrace()
             }
         })
+    }
+
+    override fun onBackPressed() {
+        return
     }
 }

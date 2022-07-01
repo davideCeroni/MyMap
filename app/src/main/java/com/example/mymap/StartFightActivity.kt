@@ -35,6 +35,7 @@ class StartFightActivity: AppCompatActivity() {
             intent.putExtra("n_question", n_question)
             intent.putExtra("ownerScore", ownerScore)
             startActivity(intent)
+            finish()
         }
     }
 }

@@ -20,13 +20,15 @@ class PersonalizeActivity: AppCompatActivity() {
     private lateinit var txtTypeUsername: TextView
     private lateinit var editTextUsername: EditText
     private lateinit var btnSave: Button
-    private var avatar = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personalization)
 
         rbtnGroup = findViewById(R.id.rbtnGroup)
+        val initAvatar = intent.getIntExtra("avatar", 1)
+        val b:RadioButton = rbtnGroup.getChildAt(initAvatar-1) as RadioButton
+        b.isChecked = true
         txtTypeUsername = findViewById(R.id.txtTypeUsername)
         editTextUsername = findViewById(R.id.edittextUsername)
         btnSave = findViewById(R.id.btnSave)

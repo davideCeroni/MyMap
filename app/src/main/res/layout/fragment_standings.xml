@@ -25,20 +25,42 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="150dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/medal_gold"/>
+
+        <ImageView
+            android:id="@+id/imgAvatarGold"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:elevation="15dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginStart="15dp"
+            app:layout_constraintStart_toEndOf="@id/imgGold"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtFirst"
-            android:layout_width="wrap_content"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:text="First"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgAvatarGold"
+            android:layout_marginTop="165dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/txtScoreGold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgGold"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="170dp"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginEnd="40dp"/>
 
         <ImageView
             android:id="@+id/imgSilver"
@@ -47,20 +69,42 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="250dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/medal_silver"/>
+
+        <ImageView
+            android:id="@+id/imgAvatarSilver"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:elevation="15dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginStart="15dp"
+            app:layout_constraintStart_toEndOf="@id/imgSilver"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtSecond"
-            android:layout_width="wrap_content"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:text="Second"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgAvatarSilver"
+            android:layout_marginTop="265dp"
+            android:layout_marginStart="20dp" />
+
+        <TextView
+            android:id="@+id/txtScoreSilver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgSilver"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="270dp"
-            android:layout_marginStart="20dp" />
+            android:layout_marginEnd="40dp"/>
 
         <ImageView
             android:id="@+id/imgBronze"
@@ -69,20 +113,42 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="350dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/medal_bronze"/>
+
+        <ImageView
+            android:id="@+id/imgAvatarBronze"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:elevation="15dp"
+            android:layout_marginTop="355dp"
+            android:layout_marginStart="15dp"
+            app:layout_constraintStart_toEndOf="@id/imgBronze"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtThird"
-            android:layout_width="wrap_content"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:text="Third"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgAvatarBronze"
+            android:layout_marginTop="365dp"
+            android:layout_marginStart="20dp" />
+
+        <TextView
+            android:id="@+id/txtScoreBronze"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgBronze"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="370dp"
-            android:layout_marginStart="20dp" />
+            android:layout_marginEnd="40dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recListStandings"

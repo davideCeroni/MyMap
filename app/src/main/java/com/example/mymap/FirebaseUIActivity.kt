@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthMethodPickerLayout
 import com.firebase.ui.auth.AuthUI
@@ -55,6 +56,12 @@ class FirebaseUIActivity: AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             val user = FirebaseAuth.getInstance().currentUser
             userExist(this)
+        }
+        else{
+            AlertDialog.Builder(this)
+                .setTitle("Login Error")
+                .setMessage("Try to turn on your internet")
+                .show()
         }
     }
 
@@ -119,18 +126,28 @@ class FirebaseUIActivity: AppCompatActivity() {
         apiInterface?.enqueue( object : Callback<ErrorMessage> {
 
             override fun onResponse(call: Call<ErrorMessage>, response: Response<ErrorMessage>) {
-                val errorMessage = response.body()!!
-                if (errorMessage.message == "user not found") {
-                    val intent = Intent (thisContext, PersonalizeActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    val intent = Intent (thisContext, MainActivity::class.java)
-                    startActivity(intent)
+                if(!response.isSuccessful) {
+                    AlertDialog.Builder(thisContext)
+                        .setTitle("Error")
+                        .setMessage("Error communicating with the server")
+                        .show()
                 }
+                val errorMessage = response.body()!!
+                lateinit var intent:Intent
+                if (errorMessage.message == "user not found") {
+                    intent = Intent (thisContext, PersonalizeActivity::class.java)
+                } else {
+                    intent = Intent (thisContext, MainActivity::class.java)
+                }
+                startActivity(intent)
+                finish()
             }
 
             override fun onFailure(call: Call<ErrorMessage>, t: Throwable) {
-                t.printStackTrace()
+                AlertDialog.Builder(thisContext)
+                    .setTitle("HTTP Error")
+                    .setMessage("Try to turn on your internet")
+                    .show()
             }
         })
     }
