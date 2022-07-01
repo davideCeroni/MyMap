@@ -1,28 +1,30 @@
 package com.example.mymap
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
 
 class CustomAdapterNotifications(private val dataSet: ArrayList<Notification>) :
     RecyclerView.Adapter<CustomAdapterNotifications.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imgState: ImageView
-        val txtTitle: TextView
-        val txtSnippet: TextView
-        val txtDateTime: TextView
-
-        init {
-            txtTitle = view.findViewById(R.id.txtTitleRecNotifications)
-            txtSnippet = view.findViewById(R.id.txtSnippetRecNotifications)
-            txtDateTime = view.findViewById(R.id.txtDateTimeRecNotifications)
-            imgState = view.findViewById(R.id.imgStateRecNotifications)
-        }
+        val imgState: ImageView = view.findViewById(R.id.imgStateRecNotifications)
+        val txtTitle: TextView = view.findViewById(R.id.txtTitleRecNotifications)
+        val txtSnippet: TextView = view.findViewById(R.id.txtSnippetRecNotifications)
+        val txtDateTime: TextView = view.findViewById(R.id.txtDateTimeRecNotifications)
+        val btnClear: ImageButton = view.findViewById(R.id.btnClear)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -44,6 +46,27 @@ class CustomAdapterNotifications(private val dataSet: ArrayList<Notification>) :
                 override fun onSuccess() {}
                 override fun onError(e: java.lang.Exception?) {}
             })
+        viewHolder.btnClear.setOnClickListener {
+            deleteNotification(dataSet[position].uuid, position)
+
+        }
+    }
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun deleteNotification (uuid: String, position: Int) {
+        val apiInterface = ApiInterface.create().clearNotification(uuid)
+
+        apiInterface.enqueue( object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                removeAt(position)
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {}
+
+        })
+    }
+    fun removeAt(position: Int) {
+        dataSet.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, dataSet.size)
     }
 
     override fun getItemCount() = dataSet.size
