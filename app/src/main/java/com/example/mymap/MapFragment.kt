@@ -13,18 +13,21 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.roundToInt
 
 class MapFragment : Fragment() {
 
     private lateinit var rootView: View
     private var currentUser: UserInfo? = null
     private var fightPoints: List<FightPoint>? = null
+    private lateinit var map: GoogleMap
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +40,7 @@ class MapFragment : Fragment() {
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
 
         mapFragment!!.getMapAsync { mMap ->
+            map = mMap
             mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(activity!!, R.raw.map_style))
             mMap.uiSettings.isMapToolbarEnabled = false
@@ -128,10 +132,29 @@ class MapFragment : Fragment() {
             }
         })
     }
+    private fun moveCameraOnMarkSelected(pos :String){
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos.toLatLng(), 5F))
+
+    }
 
     private fun checkData(){
         if (fightPoints != null && currentUser != null){
-            initialiseViewPager(CarouselInfo(currentUser!!.notifications, fightPoints!!))
+            val carousel = CarouselInfo(currentUser!!.notifications, fightPoints!!)
+
+            val viewPager = initialiseViewPager(carousel)
+
+            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrolled(position:Int, positionOffset:Float, positionOffsetPixels:Int) {
+                    val pos = (position + positionOffset).roundToInt()
+                    val fightpointPosition: Int = pos - carousel.notifications.size
+
+                    if (fightpointPosition < 0) {
+                        moveCameraOnMarkSelected(carousel.notifications[pos].fightpoint.posizione)
+                    } else {
+                        moveCameraOnMarkSelected(carousel.fightpoints[fightpointPosition].posizione)
+                    }
+                }
+            })
         }
     }
 
