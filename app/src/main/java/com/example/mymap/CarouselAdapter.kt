@@ -70,6 +70,8 @@ class CarouselAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
 
         if (currentFightPoint.user == null){
             //  fightpoint senza owner
+            viewHolder.txtLost.text = ""
+            viewHolder.avatar.setImageResource(0)
             viewHolder.txtSnippet.text = "Not Owned"
             return
         }

@@ -1,7 +1,6 @@
 package com.example.mymap
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Build
@@ -15,14 +14,12 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.math.roundToInt
-
 
 class MapFragment : Fragment() {
 
@@ -45,10 +42,8 @@ class MapFragment : Fragment() {
 
         mapFragment!!.getMapAsync { mMap ->
             map = mMap
-            mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(activity!!, R.raw.map_style))
             mMap.uiSettings.isMapToolbarEnabled = false
-            mMap.setInfoWindowAdapter(CustomInfoWindowForGoogleMap(activity!!))
             placeMarkers(mMap)
 
             mMap.setOnMarkerClickListener {
@@ -58,25 +53,8 @@ class MapFragment : Fragment() {
                         position = index
                     }
                 }
-                carouselView.setCurrentItem(position!!, true)
+                carouselView.setCurrentItem(position!! + carouselInfo.notifications.size, true)
                 false
-            }
-
-            mMap.setOnInfoWindowClickListener {
-                var currentFightPoint: FightPoint? = null
-                for (fightPoint in fightPoints!!) {
-                    if(it.position == fightPoint.posizione.toLatLng()) {
-                        currentFightPoint = fightPoint
-                        break
-                    }
-                }
-
-                val intent = Intent(activity, StartFightActivity::class.java)
-                intent.putExtra("fightpoint_uuid", currentFightPoint?.uuid)
-                intent.putExtra("ownerUsername", currentFightPoint?.user?.username)
-                intent.putExtra("n_question", currentFightPoint?.n_questions)
-                intent.putExtra("ownerScore", currentFightPoint?.score)
-                startActivity(intent)
             }
         }
         return rootView
@@ -92,35 +70,19 @@ class MapFragment : Fragment() {
                 if(response.body() == null) return
                 fightPoints = response.body()
                 for (i in fightPoints!!) {
-                    if(i.user == null) {
-                        googleMap.addMarker(
-                            MarkerOptions()
-                                .position(i.posizione.toLatLng())
-                                .title("${i.city},${i.state}")
-                                .snippet("Not owned. Tap me to fight!")
-                                .icon(bitmapDescriptorFromVector(activity!!, R.drawable.ic_pin_blue))
-                        )
-                    } else {
-                        if (i.user!!.firebase_id == MyApplication.instance.currentFirebaseUser?.uid) {
-                            googleMap.addMarker(
-                                MarkerOptions()
-                                    .position(i.posizione.toLatLng())
-                                    .title("${i.city},${i.state}")
-                                    .snippet("  You own this point!\n" +
-                                            "Score: ${i.score}")
-                                    .icon(bitmapDescriptorFromVector(activity!!, R.drawable.ic_pin_green))
-                            )
-                        } else {
-                            googleMap.addMarker(
-                                MarkerOptions()
-                                    .position(i.posizione.toLatLng())
-                                    .title("${i.city},${i.state}")
-                                    .snippet("Own by ${i.user!!.username}. Tap me to fight!\n" +
-                                            "Score: ${i.score}")
-                                    .icon(bitmapDescriptorFromVector(activity!!, R.drawable.ic_pin_red))
-                            )
+                    var icon: Int? = null
+                    icon = when (i.user) {
+                        null -> R.drawable.ic_pin_blue
+                        else -> {
+                            if (i.user!!.firebase_id == MyApplication.instance.currentFirebaseUser?.uid) R.drawable.ic_pin_green
+                            else R.drawable.ic_pin_red
                         }
                     }
+                    googleMap.addMarker(
+                        MarkerOptions()
+                            .position(i.posizione.toLatLng())
+                            .icon(bitmapDescriptorFromVector(activity!!, icon))
+                    )
                 }
                 checkData()
             }
@@ -148,6 +110,7 @@ class MapFragment : Fragment() {
             }
         })
     }
+
     private fun moveCameraOnMarkSelected(pos :String){
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos.toLatLng(), 5F))
 
@@ -195,4 +158,3 @@ class MapFragment : Fragment() {
         }
     }
 }
-
